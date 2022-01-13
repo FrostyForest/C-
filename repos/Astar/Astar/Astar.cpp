@@ -140,5 +140,5 @@ int main() {
 	}
 	_getch();
 	closegraph();
-	return sum;//返回距离
+	return sum;//返回迭代次数
 }
