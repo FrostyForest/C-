@@ -51,13 +51,13 @@ int main() {
 	vector<vector<int>> visited(21, vector<int>(21, 0));
 	vector<vector<int>> unvisited(21, vector<int>(21, 1));
 	vector<vector<int>> path(21, vector<int>(21, 0));
-	vector<vector<vector<int>>> sheet1(21, vector<vector<int>>(21, vector<int>(3, INT_MAX))); //存储单元，0：到达这个点之前经过那个点的y坐标，1：x坐标，2：到起点的最短路径距离
+	vector<vector<vector<int>>> sheet1(21, vector<vector<int>>(21, vector<int>(3, INT_MAX))); //存储单元，0：到达这个点之前经过那个点的y坐标，1：x坐标，2：到起点的最短路径距离即g(n)
 	int x_begin = 12, y_begin = 4;//设置起点
 	int x_end = 8, y_end = 11;//设置终点
 
 	sheet1[y_begin][x_begin][0] = y_begin;
 	sheet1[y_begin][x_begin][1] = x_begin;
-	sheet1[y_begin][x_begin][2] = 0;//2为到起点距离
+	sheet1[y_begin][x_begin][2] = 0;//到起点的最短路径距离 g(n)
 	
 	while (visited[y_end][x_end] != 1) {
 		setfillcolor(WHITE); fillrectangle(x_begin * 20, y_begin * 20, x_begin * 20 + 20, y_begin * 20 + 20);//起点为白色

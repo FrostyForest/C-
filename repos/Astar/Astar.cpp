@@ -33,13 +33,13 @@ vector<vector<int>> distance_of_points = {
 
 
 int main() {
-	initgraph(500, 500);	// ´´½¨»æÍ¼´°¿Ú
-	for (int y = 0; y < 21; y++) {//»­³ö¸ñ×Ó
+	initgraph(500, 500);	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½
+	for (int y = 0; y < 21; y++) {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		for (int x = 0; x < 21; x++) {
 			rectangle(x * 20, y * 20, x * 20 + 20, y * 20 + 20);
 		}
 	}
-	for (int y = 0; y < 21; y++) {//»­³öÕÏ°­Îï
+	for (int y = 0; y < 21; y++) {//ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½
 		for (int x = 0; x < 21; x++) {
 			if (distance_of_points[y][x] == 999) {
 				setfillcolor(RED);
@@ -47,24 +47,24 @@ int main() {
 			}
 		}
 	}
-	int sum = 0;//µü´ú´ÎÊý
+	int sum = 0;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	vector<vector<int>> visited(21, vector<int>(21, 0));
 	vector<vector<int>> unvisited(21, vector<int>(21, 1));
 	vector<vector<int>> path(21, vector<int>(21, 0));
-	vector<vector<vector<int>>> sheet1(21, vector<vector<int>>(21, vector<int>(4, INT_MAX)));//´æ´¢µ¥Ôª£¬0£ºµ½´ïÕâ¸öµãÖ®Ç°¾­¹ýÄÇ¸öµãµÄy×ø±ê£¬1£ºx×ø±ê£¬2£ºµ½ÆðµãµÄ×î¶ÌÂ·¾¶¾àÀë,¼´g(n)£¬3£ºµ½ÖÕµãµÄÂü¹þ¶Ù¾àÀë,¼´h(n)
-	int x_begin = 12, y_begin = 11;//ÉèÖÃÆðµã
-	int x_end = 8, y_end = 9;//ÉèÖÃÖÕµã
+	vector<vector<vector<int>>> sheet1(21, vector<vector<int>>(21, vector<int>(4, INT_MAX)));//ï¿½æ´¢ï¿½ï¿½Ôªï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½ï¿½yï¿½ï¿½ï¿½ê£¬1ï¿½ï¿½xï¿½ï¿½ï¿½ê£¬2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½g(n)ï¿½ï¿½3ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¾ï¿½ï¿½ï¿½,ï¿½ï¿½h(n)
+	int x_begin = 12, y_begin = 4;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	int x_end = 8, y_end = 11;//ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½
 	
 	sheet1[y_begin][x_begin][0] = y_begin;
 	sheet1[y_begin][x_begin][1] = x_begin;
-	sheet1[y_begin][x_begin][2] = 0;//2Îªµ½Æðµã¾àÀë
-	sheet1[y_begin][x_begin][3] = abs(y_end - y_begin) + abs(x_end + x_begin)*2;//3Îªµ½ÖÕµãµÄÂü¹þ¶Ù¾àÀë*2
+	sheet1[y_begin][x_begin][2] = 0;//2Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	sheet1[y_begin][x_begin][3] = abs(y_end - y_begin) + abs(x_end + x_begin);//3Îªï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¾ï¿½ï¿½ï¿½
 	while (visited[y_end][x_end] != 1) {
-		setfillcolor(WHITE); fillrectangle(x_begin * 20, y_begin * 20, x_begin * 20 + 20, y_begin * 20 + 20);//ÆðµãÎª°×É«
-		setfillcolor(YELLOW); fillrectangle(x_end * 20, y_end * 20, x_end * 20 + 20, y_end * 20 + 20);//ÖÕµãÎª»ÒÉ«
-		int min_distance = INT_MAX;//±íÄÚ×îÐ¡¾àÀë
-		int min_y = 0, min_x = 0;//±íÄÚ¾àÀë×îÐ¡µãµÄ×ø±ê
-		for (int y = 0; y < 21; y++) {//±íÄÚÕÒµ½×îÐ¡Î´·ÃÎÊµãµÄ×ø±êºÍ¾àÀë
+		setfillcolor(WHITE); fillrectangle(x_begin * 20, y_begin * 20, x_begin * 20 + 20, y_begin * 20 + 20);//ï¿½ï¿½ï¿½Îªï¿½ï¿½É«
+		setfillcolor(YELLOW); fillrectangle(x_end * 20, y_end * 20, x_end * 20 + 20, y_end * 20 + 20);//ï¿½Õµï¿½Îªï¿½ï¿½É«
+		int min_distance = INT_MAX;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½
+		int min_y = 0, min_x = 0;//ï¿½ï¿½ï¿½Ú¾ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		for (int y = 0; y < 21; y++) {//ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½Ð¡Î´ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¾ï¿½ï¿½ï¿½
 			for (int x = 0; x < 21; x++) {
 				if (visited[y][x] == 1) continue;
 				else {
@@ -79,50 +79,50 @@ int main() {
 		setfillcolor(GREEN);
 		fillrectangle(min_x * 20, min_y * 20, min_x * 20 + 20, min_y * 20 + 20);
 		Sleep(1 * 100);
-		sum++;//µü´ú´ÎÊý+1
-		//´¦ÀíÉÏµã
+		sum++;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+1
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½
 		if (min_y + 1 <= 20) {
 			int x_1 = min_x; int y_1 = min_y + 1;
-			if (sheet1[min_y][min_x][2] + distance_of_points[y_1][x_1] < sheet1[y_1][x_1][2]) {//¸üÐÂ¾àÀë
+			if (sheet1[min_y][min_x][2] + distance_of_points[y_1][x_1] < sheet1[y_1][x_1][2]) {//ï¿½ï¿½ï¿½Â¾ï¿½ï¿½ï¿½
 				sheet1[y_1][x_1][2] = min(sheet1[y_1][x_1][2], sheet1[min_y][min_x][2] + distance_of_points[y_1][x_1]);
 				sheet1[y_1][x_1][0] = min_y; sheet1[y_1][x_1][1] = min_x;
 			}
-			sheet1[y_1][x_1][3] = sheet1[y_1][x_1][2] + (abs(y_1 - y_end) + abs(x_1 - x_end))*2;//f(n)=g(n)+h(n)
+			sheet1[y_1][x_1][3] = sheet1[y_1][x_1][2] + (abs(y_1 - y_end) + abs(x_1 - x_end))*1;//f(n)=g(n)+h(n)
 		}
-		//´¦ÀíÏÂµã
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½
 		if (min_y - 1 >= 0) {
 			int x_2 = min_x; int y_2 = min_y - 1;
-			if (sheet1[min_y][min_x][2] + distance_of_points[y_2][x_2] < sheet1[y_2][x_2][2]) {//¸üÐÂ¾àÀë
+			if (sheet1[min_y][min_x][2] + distance_of_points[y_2][x_2] < sheet1[y_2][x_2][2]) {//ï¿½ï¿½ï¿½Â¾ï¿½ï¿½ï¿½
 				sheet1[y_2][x_2][2] = min(sheet1[y_2][x_2][2], sheet1[min_y][min_x][2] + distance_of_points[y_2][x_2]);
 				sheet1[y_2][x_2][0] = min_y; sheet1[y_2][x_2][1] = min_x;
 			}
-			sheet1[y_2][x_2][3] = sheet1[y_2][x_2][2] + (abs(y_2 - y_end) + abs(x_2 - x_end))*2;//f(n)=g(n)+h(n)
+			sheet1[y_2][x_2][3] = sheet1[y_2][x_2][2] + (abs(y_2 - y_end) + abs(x_2 - x_end))*1;//f(n)=g(n)+h(n)
 		}
-		//´¦Àí×óµã
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (min_x - 1 >= 0) {
 			int x_3 = min_x - 1; int y_3 = min_y;
-			if (sheet1[min_y][min_x][2] + distance_of_points[y_3][x_3] < sheet1[y_3][x_3][2]) {//¸üÐÂ¾àÀë
+			if (sheet1[min_y][min_x][2] + distance_of_points[y_3][x_3] < sheet1[y_3][x_3][2]) {//ï¿½ï¿½ï¿½Â¾ï¿½ï¿½ï¿½
 				sheet1[y_3][x_3][2] = min(sheet1[y_3][x_3][2], sheet1[min_y][min_x][2] + distance_of_points[y_3][x_3]);
 				sheet1[y_3][x_3][0] = min_y; sheet1[y_3][x_3][1] = min_x;
 			}
-			sheet1[y_3][x_3][3] = sheet1[y_3][x_3][2] + (abs(y_3 - y_end) + abs(x_3 - x_end))*2;//f(n)=g(n)+h(n)
+			sheet1[y_3][x_3][3] = sheet1[y_3][x_3][2] + (abs(y_3 - y_end) + abs(x_3 - x_end))*1;//f(n)=g(n)+h(n)
 		}
-		//´¦ÀíÓÒµã
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½
 		if (min_x + 1 <= 20) {
 			int x_4 = min_x + 1; int y_4 = min_y;
-			if (sheet1[min_y][min_x][2] + distance_of_points[y_4][x_4] < sheet1[y_4][x_4][2]) {//¸üÐÂ¾àÀë
+			if (sheet1[min_y][min_x][2] + distance_of_points[y_4][x_4] < sheet1[y_4][x_4][2]) {//ï¿½ï¿½ï¿½Â¾ï¿½ï¿½ï¿½
 				sheet1[y_4][x_4][2] = min(sheet1[y_4][x_4][2], sheet1[min_y][min_x][2] + distance_of_points[y_4][x_4]);
 				sheet1[y_4][x_4][0] = min_y; sheet1[y_4][x_4][1] = min_x;
 			}
-			sheet1[y_4][x_4][3] = sheet1[y_4][x_4][2] + (abs(y_4 - y_end) + abs(x_4 - x_end))*2;//f(n)=g(n)+h(n)
+			sheet1[y_4][x_4][3] = sheet1[y_4][x_4][2] + (abs(y_4 - y_end) + abs(x_4 - x_end))*1;//f(n)=g(n)+h(n)
 		}
 	}
 	int x_r = x_end; int y_r = y_end;
-	while (x_r != x_begin || y_r != y_begin) {//´ÓÖÕµã¿ªÊ¼·´ÏòÊä³öÂ·¾¶×ø±ê
+	while (x_r != x_begin || y_r != y_begin) {//ï¿½ï¿½ï¿½Õµã¿ªÊ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		cout << x_r << " " << y_r << endl;
-		setfillcolor(WHITE); fillrectangle(x_begin * 20, y_begin * 20, x_begin * 20 + 20, y_begin * 20 + 20);//ÆðµãÎª°×É«
-		setfillcolor(YELLOW); fillrectangle(x_end * 20, y_end * 20, x_end * 20 + 20, y_end * 20 + 20);//ÖÕµãÎª»ÆÉ«
-		setfillcolor(BLUE);//Â·¾¶ÎªÀ¶É«
+		setfillcolor(WHITE); fillrectangle(x_begin * 20, y_begin * 20, x_begin * 20 + 20, y_begin * 20 + 20);//ï¿½ï¿½ï¿½Îªï¿½ï¿½É«
+		setfillcolor(YELLOW); fillrectangle(x_end * 20, y_end * 20, x_end * 20 + 20, y_end * 20 + 20);//ï¿½Õµï¿½Îªï¿½ï¿½É«
+		setfillcolor(BLUE);//Â·ï¿½ï¿½Îªï¿½ï¿½É«
 		fillrectangle(x_r * 20, y_r * 20, x_r * 20 + 20, y_r * 20 + 20);
 		Sleep(5 * 100);
 		path[y_r][x_r] = 1;
@@ -132,9 +132,9 @@ int main() {
 
 	}
 	path[y_begin][x_begin] = 1;
-	cout << sheet1[y_end][x_end][2]<<endl;//Êä³ö×î¶ÌÂ·¾¶¾àÀë
-	cout << sum << endl;//Êä³öµü´ú´ÎÊý
+	cout << sheet1[y_end][x_end][2]<<endl;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	cout << sum << endl;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	_getch();
 	closegraph();
-	return sum;//·µ»Øµü´ú´ÎÊý;
+	return sum;//ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½;
 }
