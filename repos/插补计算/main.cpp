@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     Widget w;
+    w.setFixedSize(700,600);
     w.show();
 
 

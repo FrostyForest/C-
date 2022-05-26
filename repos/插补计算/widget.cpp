@@ -7,8 +7,8 @@ Widget::Widget(QWidget *parent)
 {
     ui->setupUi(this);
 
-    ui->lineEdit->setValidator(new QIntValidator(1,100,this));
-    ui->lineEdit_2->setValidator(new QIntValidator(0,500,this));
+    ui->lineEdit->setValidator(new QIntValidator(1,100,this));//步长范围控制
+    ui->lineEdit_2->setValidator(new QIntValidator(0,500,this));//坐标范围控制
     ui->lineEdit_3->setValidator(new QIntValidator(0,500,this));
     ui->lineEdit_4->setValidator(new QIntValidator(0,500,this));
     ui->lineEdit_5->setValidator(new QIntValidator(0,500,this));
@@ -20,21 +20,24 @@ Widget::~Widget()
     delete ui;
 }
 
-void Widget::out_step(){
+void Widget::out_step(){//更新步长
     QString a=ui->lineEdit->text();
     step=a.toInt();
     update();
 }
 void Widget::paintEvent(QPaintEvent *event){
-   LineInterpolation(xs,ys,xe,ye,step);
-   Circle a(250,500,500,250,250,10);
    QPainter painter(this);
-   painter.drawLine(a.xc,a.yc,0,0);
-   qDebug()<<a.xc;
+   painter.setWindow(0,this->height(),this->width(),-(this->height()));//重新设置坐标系
+   paintExis();
+   if(ui->radioButton->isChecked()==1)LineInterpolation(xs,ys,xe,ye,step,painter);
+   Circle a(250,400,400,250,200,10);
+
+   //painter.drawLine(a.xc,a.yc,0,0);
+   //qDebug()<<a.xc;
 
 }
 
-void Widget::LineInterpolation(int x0,int y0,int x1,int y1,int step){
+void Widget::LineInterpolation(int x0,int y0,int x1,int y1,int step,QPainter &painter){
     int xs,ys;//起点
     int xe,ye;//终点
     int x_dirc;int y_dirc;
@@ -53,8 +56,8 @@ void Widget::LineInterpolation(int x0,int y0,int x1,int y1,int step){
     else{
         y_dirc=-1;
     }
-    QPainter painter(this);
-    painter.setWindow(0,this->height(),this->width(),-(this->height()));
+
+
     int x=xs,y=ys;int i=0;
     int xb=xs,yb=ys;
     float k(fabs((float)(ye-ys)/(xe-xs)));
@@ -79,7 +82,7 @@ void Widget::LineInterpolation(int x0,int y0,int x1,int y1,int step){
 
 
 
-void Widget::on_lineEdit_2_editingFinished()
+void Widget::on_lineEdit_2_editingFinished()//输入转换并更新参数
 {
     QString a=ui->lineEdit_2->text();
     xs=a.toInt();
@@ -104,3 +107,21 @@ void Widget::on_lineEdit_5_editingFinished()
     update();
 }
 
+
+
+
+void Widget::slot1()
+{
+    bool status=!(ui->groupBox_2->isEnabled());
+    ui->groupBox_2->setEnabled(status);
+    update();
+
+}
+
+void Widget::paintExis(){
+    QPainter painter(this);
+    QFont font;//字体类属性对象
+    font.setPixelSize(20);
+    painter.setFont(font);
+    painter.drawText(width()/2,height()/2,"a");
+}

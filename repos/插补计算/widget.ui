@@ -42,32 +42,6 @@
     <string>步长:</string>
    </property>
   </widget>
-  <widget class="QRadioButton" name="radioButton">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>60</y>
-     <width>118</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>直线插补</string>
-   </property>
-  </widget>
-  <widget class="QRadioButton" name="radioButton_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>90</y>
-     <width>118</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>圆弧插补</string>
-   </property>
-  </widget>
   <widget class="QLineEdit" name="lineEdit_2">
    <property name="geometry">
     <rect>
@@ -172,6 +146,108 @@
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>80</y>
+     <width>91</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>插补方式</string>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <widget class="QRadioButton" name="radioButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>118</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>直线插补</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>118</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>圆弧插补</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>80</y>
+     <width>120</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>圆弧插补方向</string>
+   </property>
+   <widget class="QRadioButton" name="radioButton_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>顺时针插补</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_4">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>50</y>
+      <width>95</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>逆时针插补</string>
+    </property>
+   </widget>
+  </widget>
  </widget>
  <resources/>
  <connections>
@@ -255,6 +331,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>radioButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>Widget</receiver>
+   <slot>slot1()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>98</x>
+     <y>111</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>out_step()</slot>
@@ -262,5 +354,6 @@
   <slot>on_lineEdit_3_editingFinished()</slot>
   <slot>on_lineEdit_4_editingFinished()</slot>
   <slot>on_lineEdit_5_editingFinished()</slot>
+  <slot>slot1()</slot>
  </slots>
 </ui>
