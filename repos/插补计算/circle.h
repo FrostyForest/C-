@@ -12,9 +12,9 @@ public:
 signals:
 
 public:
-    int xs{50},ys{100};
-    int xe{100},ye{50};
-    int radius{50};
+    int xs{0},ys{0};
+    int xe{0},ye{0};
+    int radius{0};
     int xc{0},yc{0};
     int step{1};
 };

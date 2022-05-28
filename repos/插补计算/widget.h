@@ -20,8 +20,7 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
-    void LineInterpolation(int x0,int y0,int x1,int y1,int step,QPainter &painter);
-    void paintExis();
+    void LineInterpolation(int x0,int y0,int x1,int y1,int step);
 
 public slots:
     void out_step();
@@ -34,13 +33,6 @@ public slots:
     void on_lineEdit_3_editingFinished();
     void on_lineEdit_4_editingFinished();
     void on_lineEdit_5_editingFinished();
-
-
-
-
-
-private slots:
-    void slot1();
 
 private:
     Ui::Widget *ui;
