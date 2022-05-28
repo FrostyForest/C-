@@ -1,4 +1,4 @@
-#ifndef WIDGET_H
+﻿#ifndef WIDGET_H
 #define WIDGET_H
 
 #include <QWidget>
@@ -6,6 +6,8 @@
 #include <QPair>
 #include <QDebug>
 #include <QIntValidator>
+#include <QMessageBox>
+#include <QtMath>
 #include "circle.h"
 
 
@@ -21,6 +23,10 @@ public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
     void LineInterpolation(int x0,int y0,int x1,int y1,int step);
+    void ArcInterpolationClockwise(int x0,int y0,int x1,int y1,int r,int xc,int yc,int step);
+    void ArcInterpolationCounterclock(int x0,int y0,int x1,int y1,int r,int xc,int yc,int step);
+    void paintExis();
+
 
 public slots:
     void out_step();
@@ -34,11 +40,32 @@ public slots:
     void on_lineEdit_4_editingFinished();
     void on_lineEdit_5_editingFinished();
 
+
+
+
+public slots:
+    void slot1();
+
+private slots:
+    void on_lineEdit_6_editingFinished();
+
+
+
+    void on_radioButton_clicked();
+
+    void on_pushButton_pressed();
+
+    void on_pushButton_released();
+
 private:
     Ui::Widget *ui;
     int step=10;
-    int xs{0},ys{0};
-    int xe{0},ye{0};
+    int xs{0},ys{200};
+    int xe{200},ye{200};
+    int r{100};
+    int xc{100},yc{200};
+    bool switcher=0;
+
 };
 #endif // WIDGET_H
 
