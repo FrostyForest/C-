@@ -23,8 +23,8 @@ public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
     void LineInterpolation(int x0,int y0,int x1,int y1,int step);
-    void ArcInterpolationClockwise(int x0,int y0,int x1,int y1,int r,int xc,int yc,int step);
-    void ArcInterpolationCounterclock(int x0,int y0,int x1,int y1,int r,int xc,int yc,int step);
+    void ArcInterpolationClockwise(int x0,int y0,int x1,int y1,int r,double xc,double yc,int step);
+    void ArcInterpolationCounterclock(int x0,int y0,int x1,int y1,int r,double xc,double yc,int step);
     void paintExis();
 
 
@@ -63,7 +63,7 @@ private:
     int xs{0},ys{200};
     int xe{200},ye{200};
     int r{100};
-    int xc{100},yc{200};
+    double xc{100.0},yc{200.0};
     bool switcher=0;
 
 };

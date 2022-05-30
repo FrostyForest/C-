@@ -19,7 +19,7 @@ public:
     int xs{0},ys{100};
     int xe{100},ye{100};
     int radius{50};
-    int xc{0},yc{0};
+    double xc{0.0},yc{0.0};
     bool isCircle{1};
 
 };

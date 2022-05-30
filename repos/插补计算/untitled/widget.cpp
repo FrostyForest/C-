@@ -194,7 +194,7 @@ void Widget::on_lineEdit_6_editingFinished()//构造圆
     //update();
 }
 
-void Widget::ArcInterpolationClockwise(int x0,int y0,int x1,int y1,int r,int xc,int yc,int step){//圆弧顺时针插补
+void Widget::ArcInterpolationClockwise(int x0,int y0,int x1,int y1,int r,double xc,double yc,int step){//圆弧顺时针插补
     QPainter painter(this);
     painter.setWindow(0,this->height(),this->width(),-(this->height()));//重新设置坐标系
     int nx=(x1-x0)/step;int ny=(y1-y0)/step;int n=qAbs(nx)+qAbs(ny);
@@ -203,7 +203,24 @@ void Widget::ArcInterpolationClockwise(int x0,int y0,int x1,int y1,int r,int xc,
     if(y1>y0) dircy=1;else if(y1<y0)dircy=-1;else { dircy=0;}
     int x=x0,y=y0;
     int xb,yb;
+//    double xm=(x0+x1)/2; double ym=(y0+y1)/2;//另一种计算圆心方法*************
+//    double dx2=qPow(qAbs(x1-x0)/2,2)+qPow(qAbs(y1-y0)/2,2);
+//    double dml=qPow(qPow(r,2)-dx2,0.5);
+//    double k=((double)(y1-y0))/((double)(x1-x0));
+//    double k1=-1/k;
+//    double xc1=xm-dml/(qPow(qPow(k1,2)+1,0.5));
+//    double yc1=ym-dml/(qPow(qPow(k1,2)+1,0.5))*k1;
+//    int count=0;
+//    qDebug()<<"k"<<k;
+//    qDebug()<<"k1"<<k1;
+//    qDebug()<<"dx2"<<dx2;
+//    qDebug()<<"dml"<<dml;
+//    qDebug()<<"xc1"<<xc1<<"yc1"<<yc1;
+//    qDebug()<<"xc"<<xc<<"yc"<<yc;
     while(n>0||qAbs(y-y1)>step||qAbs(x-x1)>step){
+//        if(n==0){
+//            qDebug()<<"x"<<x<<"y"<<y;
+//        }
         xb=x;yb=y;
         if(x>xc&&y>=yc){
             if(qPow(x-xc,2)+qPow(y-yc,2)>=qPow(r,2)){
@@ -289,7 +306,7 @@ void Widget::on_pushButton_released()
     switcher=0;
 }
 
-void Widget::ArcInterpolationCounterclock(int x0,int y0,int x1,int y1,int r,int xc,int yc,int step){//逆时针插补
+void Widget::ArcInterpolationCounterclock(int x0,int y0,int x1,int y1,int r,double xc,double yc,int step){//逆时针插补
     QPainter painter(this);
     painter.setWindow(0,this->height(),this->width(),-(this->height()));//重新设置坐标系
     int nx=(x1-x0)/step;int ny=(y1-y0)/step;int n=qAbs(nx)+qAbs(ny);
