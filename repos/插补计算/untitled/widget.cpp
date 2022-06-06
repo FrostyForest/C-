@@ -39,11 +39,11 @@ void Widget::paintEvent(QPaintEvent *event){
        LineInterpolation(xs,ys,xe,ye,step);
    }
 
-   if(ui->radioButton_3->isChecked()==1&&switcher==1){//顺时针插补
+   if(ui->radioButton_3->isChecked()==1&&switcher==1&&isCircle==1){//顺时针插补
        ArcInterpolationClockwise(xs,ys,xe,ye,r,xc,yc,step);
    }
 
-   if(ui->radioButton_4->isChecked()==1&&switcher==1){//顺时针插补
+   if(ui->radioButton_4->isChecked()==1&&switcher==1&&isCircle==1){//逆时针插补
        ArcInterpolationCounterclock(xs,ys,xe,ye,r,xc,yc,step);
    }
 
@@ -180,16 +180,16 @@ void Widget::on_lineEdit_6_editingFinished()//构造圆
 {
     QString a=ui->lineEdit_6->text();
     r=a.toInt();
-    if(r>250||r<1){
+    if(r>500||r<1){
         ui->lineEdit_6->clear();
-        QMessageBox::warning(this,QString::fromLocal8Bit("半径长度输入错误"),QString::fromLocal8Bit("请输入1~250内的整数"),QMessageBox::Ok);
+        QMessageBox::warning(this,QString::fromLocal8Bit("半径长度输入错误"),QString::fromLocal8Bit("请输入1~500内的整数"),QMessageBox::Ok);
     }
-    Circle c(xs,ys,xe,ye,r);
+    /*Circle c(xs,ys,xe,ye,r);
     if(c.isCircle==0){
         ui->lineEdit_6->clear();
         QMessageBox::warning(this,QString::fromLocal8Bit("半径长度输入错误"),QString::fromLocal8Bit("请输入合理长度的半径"),QMessageBox::Ok);
     }
-    xc=c.xc;yc=c.yc;
+    xc=c.xc;yc=c.yc;*/
 
     //update();
 }
@@ -218,9 +218,9 @@ void Widget::ArcInterpolationClockwise(int x0,int y0,int x1,int y1,int r,double 
 //    qDebug()<<"xc1"<<xc1<<"yc1"<<yc1;
 //    qDebug()<<"xc"<<xc<<"yc"<<yc;
     while(n>0||qAbs(y-y1)>step||qAbs(x-x1)>step){
-//        if(n==0){
-//            qDebug()<<"x"<<x<<"y"<<y;
-//        }
+        if(n==0){
+            qDebug()<<"x"<<x<<"y"<<y;
+        }
         xb=x;yb=y;
         if(x>xc&&y>=yc){
             if(qPow(x-xc,2)+qPow(y-yc,2)>=qPow(r,2)){
@@ -292,17 +292,24 @@ void Widget::on_pushButton_pressed()
     if(ui->radioButton_2->isChecked()==1){
         Circle c(xs,ys,xe,ye,r);//构造圆
         if(c.isCircle==0){
-            ui->lineEdit_6->clear();
+           isCircle=0;
+           ui->lineEdit_6->clear();
             QMessageBox::warning(this,QString::fromLocal8Bit("半径长度输入错误"),QString::fromLocal8Bit("请输入合理长度的半径"),QMessageBox::Ok);
         }
+        else{
+        isCircle=1;
         xc=c.xc;yc=c.yc;
+        update();
+        }
     }
-    update();
+
+
 }
 
 
 void Widget::on_pushButton_released()
 {
+
     switcher=0;
 }
 

@@ -64,6 +64,7 @@ private:
     int xe{200},ye{200};
     int r{100};
     double xc{100.0},yc{200.0};
+    bool isCircle=0;
     bool switcher=0;
 
 };
