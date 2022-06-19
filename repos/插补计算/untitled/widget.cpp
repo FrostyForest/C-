@@ -302,6 +302,9 @@ void Widget::on_pushButton_pressed()
         update();
         }
     }
+    else{
+        update();
+    }
 
 
 }
